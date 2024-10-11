@@ -1,13 +1,14 @@
-'use client';
-
-import React, { useState } from 'react';
+import React from 'react';
 import ReactQuill from 'react-quill';
 
 import 'react-quill/dist/quill.snow.css';
 
-const QuillEditor: React.FC = () => {
-  const [value, setValue] = useState<string>('');
+interface Props {
+  value: string;
+  setValue: (value: string) => void;
+}
 
+const QuillEditor: React.FC<Props> = ({ value, setValue }) => {
   const modules = {
     toolbar: [
       [{ header: [1, 2, 3, 4, 5, 6, false] }],
@@ -19,15 +20,13 @@ const QuillEditor: React.FC = () => {
   };
 
   return (
-    <div className='h-[90dvh]'>
-      <ReactQuill
-        className='h-full'
-        modules={modules}
-        value={value}
-        onChange={setValue}
-        placeholder='Start typing here...'
-      />
-    </div>
+    <ReactQuill
+      className='h-[60vh] overscroll-auto'
+      modules={modules}
+      value={value}
+      onChange={setValue}
+      placeholder='Start typing here...'
+    />
   );
 };
 
